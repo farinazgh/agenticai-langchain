@@ -176,3 +176,4 @@ It does not yet include:
 * or deployment automation.
 
 Those would belong to the next stages of a full RAGOps workflow.
+<img width="1693" height="6235" alt="Image" src="https://github.com/user-attachments/assets/25de26e2-5ce0-4ee1-9741-0275490e0d15" />
