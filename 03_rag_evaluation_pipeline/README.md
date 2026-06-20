@@ -40,6 +40,23 @@ This makes the answer:
 Evaluation is also important because a RAG system should not only “work”; we need to measure whether it retrieves the right context and gives faithful answers.
 
 ---
+## Architecture
+
+```mermaid
+flowchart TD
+    A[Source Data] --> B[Split into Chunks]
+    B --> C[Create Embeddings]
+    C --> D[Store in Vector Database]
+
+    E[User Question] --> F[Retrieve Relevant Chunks]
+    D --> F
+
+    F --> G[Send Context + Question to LLM]
+    G --> H[Generated Answer]
+
+    H --> I[Evaluate Answer]
+    F --> I
+```
 
 ## How
 
