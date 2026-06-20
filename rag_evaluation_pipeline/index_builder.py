@@ -11,13 +11,8 @@ from langchain_pinecone import PineconeVectorStore
 
 from pinecone import Pinecone, ServerlessSpec
 
-
 # --- CONFIG ---
 URL = "https://en.wikipedia.org/wiki/2023_Cricket_World_Cup"
-
-CHUNK_SIZE = 500
-CHUNK_OVERLAP = 100
-
 INDEX_NAME = "cwc-index"
 EMBED_MODEL = "text-embedding-3-small"
 EMBED_DIMENSION = 1536
@@ -31,18 +26,8 @@ NAMESPACE = "default"
 # --- LOAD ENV ---
 load_dotenv()
 
-pinecone_api_key = os.getenv("PINECONE_API_KEY")
-openai_api_key = os.getenv("OPENAI_API_KEY")
-
-if not pinecone_api_key:
-    raise ValueError("Missing PINECONE_API_KEY in .env")
-
-if not openai_api_key:
-    raise ValueError("Missing OPENAI_API_KEY in .env")
-
-
 print("Connecting to Pinecone...")
-pc = Pinecone(api_key=pinecone_api_key)
+pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
 
 
 print("Checking Pinecone index...")
@@ -78,8 +63,8 @@ documents = loader.load()
 
 print("Splitting into chunks...")
 splitter = RecursiveCharacterTextSplitter(
-    chunk_size=CHUNK_SIZE,
-    chunk_overlap=CHUNK_OVERLAP,
+    chunk_size=500,
+    chunk_overlap=100,
 )
 chunks = splitter.split_documents(documents)
 
