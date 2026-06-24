@@ -187,6 +187,17 @@ async def main():
         Colors.PURPLE,
     )
     # Crawl the documentation site
+    # Best Practice: Start small. Use depth 1 or 2 first, review the results, then increase only if necessary.
+
+    # Excessive Depth Problem
+    #
+    # The risk of exploring too much of a website.
+    #
+    # Consequences
+    # Longer runtime
+    # Higher cost
+    # More irrelevant pages
+    # Potential exponential growth in discovered pages
 
     res = tavily_crawl.invoke(
         {
@@ -197,6 +208,12 @@ async def main():
     )
 
     # Convert Tavily crawl results to LangChain Document objects
+
+    # Each crawled page containsboth source attribution and extracted text:
+    #
+    # URL
+    # Raw Content: The scraped text extracted from a page.
+    # Becomes the source material for chunking and indexing.
     all_docs = []
     for tavily_crawl_result_item in res["results"]:
         log_info(
